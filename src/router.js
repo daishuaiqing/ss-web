@@ -10,12 +10,17 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: () => import(/* webpackChunkName: "index" */ './views/Index.vue')
+      component: () => import('./views/Index.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import(/* webpackChunkName: "login" */ './views/login/Login.vue')
+      component: () => import('./views/login/Login.vue')
+    },
+    {
+      path: '/application',
+      name: 'application',
+      component: () => import('./views/application/Application.vue')
     }
   ]
 })

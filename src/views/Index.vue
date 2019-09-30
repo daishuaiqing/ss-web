@@ -15,8 +15,8 @@
       </div>
       <div class="cur-date">
         <div class="title-item">
-          <div style="font-size:38px">2019年8月19日</div>
-          <div style="font-size:38px">15:06:44</div>
+          <div style="font-size:38px">{{currentDate}}</div>
+          <div style="font-size:38px">{{currentTime}}</div>
         </div>
       </div>
     </div>
@@ -34,7 +34,46 @@
 </template>
 
 <script>
-export default {};
+import { create } from "domain";
+export default {
+  data() {
+    return {
+      currentDate: "",
+      currentTime: ""
+    };
+  },
+  methods: {
+    getCurrentDateTime() {
+      let dateObj = new Date();
+      let year = dateObj.getFullYear(); //得到年份
+      let month = dateObj.getMonth(); //得到月份
+      let date = dateObj.getDate(); //得到日期
+      let hour = dateObj.getHours(); //得到小时
+      let minu = dateObj.getMinutes(); //得到分钟
+      let sec = dateObj.getSeconds(); //得到秒
+      month = month + 1;
+      if (month < 10) month = "0" + month;
+      if (date < 10) date = "0" + date;
+      if (hour < 10) hour = "0" + hour;
+      if (minu < 10) minu = "0" + minu;
+      if (sec < 10) sec = "0" + sec;
+      this.currentDate = year + "年" + month + "月" + date + "日"
+      this.currentTime = hour + ":" + minu + ":" + sec
+    },
+    goLogin() {
+      this.$router.push({'name':'login'});
+    },
+    goApplication() {
+      this.$router.push({'name':'application'});
+    }
+  },
+  created() {
+    this.getCurrentDateTime();
+    window.setInterval(() => {
+      this.getCurrentDateTime();
+    }, 1000);
+  }
+};
 </script>
 
 <style>
